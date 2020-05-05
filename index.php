@@ -37,8 +37,8 @@
             echo "<tr><td>$vorname</td><td>$nachname</td></tr>";
         }
         ?>
-
     </table>
+    <a href="neu.html">Neue Schüler_in erstellen</a>
 </body>
 
 </html>
