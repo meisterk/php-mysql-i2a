@@ -15,11 +15,15 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // create database
 echo 'Try to create database ...<br>';
+$sql = "DROP DATABASE IF EXISTS $dbname";
+$pdo->exec($sql);
 $sql = "CREATE DATABASE $dbname";
 $pdo->exec($sql);
 
 // create user
 echo 'Try to create user ...<br>';
+$sql = "DROP USER IF EXISTS '$dbuser'@'localhost'";
+$pdo->exec($sql);
 $sql = "CREATE USER '$dbuser'@'localhost' IDENTIFIED BY '$dbpassword'";
 $pdo->exec($sql);
 
