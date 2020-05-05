@@ -29,6 +29,14 @@
         // show errors
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+        // create schueler
+        if (isset($_POST['vorname']) && isset($_POST['nachname'])) {
+            $vorname = $_POST['vorname'];
+            $nachname = $_POST['nachname'];
+            $sql = "INSERT INTO schueler SET vorname = '$vorname', nachname = '$nachname'";
+            $pdo->exec($sql);
+        }
+
         // read and display data
         $sql = "SELECT * FROM schueler";
         foreach ($pdo->query($sql) as $zeile) {
