@@ -15,18 +15,29 @@
             <th>Nachname</th>
         </tr>
 
-        <tr>
-            <td>Anna</td>
-            <td>Arm</td>
-        </tr>
-        <tr>
-            <td>Anna</td>
-            <td>Arm</td>
-        </tr>
-        <tr>
-            <td>Anna</td>
-            <td>Arm</td>
-        </tr>
+        <?php
+        $dbname = 'testdb';
+        $dbuser = 'testuser';
+        $dbpassword = '123';
+
+        // connect to MySQL as testuser
+        $pdo = new PDO(
+            "mysql:host=localhost;dbname=$dbname",
+            $dbuser,
+            $dbpassword
+        );
+        // show errors
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // read and display data
+        $sql = "SELECT * FROM schueler";
+        foreach ($pdo->query($sql) as $zeile) {
+            $vorname = $zeile['vorname'];
+            $nachname = $zeile['nachname'];
+            echo "<tr><td>$vorname</td><td>$nachname</td></tr>";
+        }
+        ?>
+
     </table>
 </body>
 
