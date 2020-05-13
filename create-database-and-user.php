@@ -24,7 +24,8 @@ $pdo->exec($sql);
 echo 'Try to create user ...<br>';
 $sql = "DROP USER IF EXISTS '$dbuser'@'localhost'";
 $pdo->exec($sql);
-$sql = "CREATE USER '$dbuser'@'localhost' IDENTIFIED BY '$dbpassword'";
+// In GBS: 'with mysql_native_password'
+$sql = "CREATE USER '$dbuser'@'localhost' IDENTIFIED with mysql_native_password BY '$dbpassword'";
 $pdo->exec($sql);
 
 // create permissions for user

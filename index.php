@@ -31,10 +31,15 @@
 
         // create schueler
         if (isset($_POST['vorname']) && isset($_POST['nachname'])) {
-            $vorname = $_POST['vorname'];
-            $nachname = $_POST['nachname'];
-            $sql = "INSERT INTO schueler SET vorname = '$vorname', nachname = '$nachname'";
-            $pdo->exec($sql);
+            $vornameMitHTMLCode = $_POST['vorname'];
+            $vorname = htmlspecialchars($vornameMitHTMLCode);
+
+            $nachnameMitHTMLCode = $_POST['nachname'];
+            $nachname = htmlspecialchars($nachnameMitHTMLCode);
+            
+            $sql = "INSERT INTO schueler SET vorname = ?, nachname = ?";
+            $statement = $pdo->prepare($sql);
+            $statement->execute([$vorname, $nachname]);            
         }
 
         // read and display data
