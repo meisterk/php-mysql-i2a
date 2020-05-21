@@ -48,6 +48,7 @@
         // read and display data
         $sql = "SELECT * FROM schueler";
         foreach ($pdo->query($sql) as $zeile) {
+            // htmlspecialchars zur Verhinderung von XSS
             $vorname = htmlspecialchars($zeile['vorname']);
             $nachname = htmlspecialchars($zeile['nachname']);
             echo "<tr><td>$vorname</td><td>$nachname</td></tr>";
