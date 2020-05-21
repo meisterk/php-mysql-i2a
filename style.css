@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 40em;
+    background-color: darkkhaki;
+    margin: 0 auto;
+}
+
+header, footer {
+    background-color: orange;
+    color: black;
+    
+    padding: 0.5em;
+}
+
+main {
+    background-color: white;
+    padding: 1em;
+}
+
+.eingabe {
+    width: 100%;
+    padding-bottom: 0.5em;
+    display: flex;    
+}
+
+.eingabe label{    
+    width: 20em;
+}
+
+.eingabe input{    
+    width: calc(100% - 20em);
+}
+
+table {
+    background-color: white;
+    border-style: solid;
+    width: 100%;
+}
+
+td {
+    text-align: center;
+}
+
+
+tr:nth-child(even) {
+    background-color: beige;
+}
+
+.button {
+    margin-top: 0.5em;
+    border-radius: 0.5em;
+    color: white;
+    padding: 0.5em;
+    display: inline-block;
+    border-style: none;
+    font-size: 1em;
+    text-decoration: none;
+    text-align: center; 
+}
+
+.neu {
+    background-color: green;
+    width: calc(100% - 1em);
+}
+
+.abbrechen {
+    background-color: red;
+    width: calc(50% - 0.75em);
+}
+.speichern {
+    background-color: blue;
+    width: calc(50% - 0.75em);
+}

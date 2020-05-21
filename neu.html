@@ -5,23 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schülerverwaltung</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Schülerverwaltung</h1>
-    <h2>Neue Schüler_in erstellen</h2>
+    <header>
+        <h1>Schülerverwaltung</h1>
+        <h2>Neue Schüler_in erstellen</h2>
+    </header>
+
+    <main>
     <form action="./" method="POST">
-        <fieldset>
-            <legend>Vorname</legend>
-            <input type="text" name="vorname">
-        </fieldset>
-        <fieldset>
-            <legend>Nachname</legend>
-            <input type="text" name="nachname">
-        </fieldset>
-        <button>Speichern</button>        
-    </form>
-    <a href="./">Abbrechen</a>
+        <div class="eingabe">
+            <label for="inputVorname">Vorname</legend>
+            <input id="inputVorname" type="text" name="vorname">
+        </div>
+        <div class="eingabe">    
+            <label for="inputNachname">Nachname</legend>
+            <input id = "inputNachname" type="text" name="nachname">
+        </div> 
+        <div>
+            <button class="button speichern">Speichern</button> 
+            <a class="button abbrechen" href="./">Abbrechen</a>
+        </div>
+    </form> 
+    </main> 
+    
+    <footer>
+        <p>von Franz Kohnle</p>
+    </footer>
 </body>
 
 </html>

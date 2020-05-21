@@ -5,10 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schülerverwaltung</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Schülerverwaltung</h1>
+    <header>
+        <h1>Schülerverwaltung</h1>
+        <h2>Liste aller Schüler_innen</h2>
+    </header>
+
+    <main>
     <table>
         <tr>
             <th>Vorname</th>
@@ -31,12 +37,9 @@
 
         // create schueler
         if (isset($_POST['vorname']) && isset($_POST['nachname'])) {
-            $vornameMitHTMLCode = $_POST['vorname'];
-            $vorname = htmlspecialchars($vornameMitHTMLCode);
-
-            $nachnameMitHTMLCode = $_POST['nachname'];
-            $nachname = htmlspecialchars($nachnameMitHTMLCode);
-            
+            $vorname = $_POST['vorname'];
+            $nachname = $_POST['nachname'];
+            // Prepared Statement zur Verhinderung von SQL-Injections
             $sql = "INSERT INTO schueler SET vorname = ?, nachname = ?";
             $statement = $pdo->prepare($sql);
             $statement->execute([$vorname, $nachname]);            
@@ -45,13 +48,17 @@
         // read and display data
         $sql = "SELECT * FROM schueler";
         foreach ($pdo->query($sql) as $zeile) {
-            $vorname = $zeile['vorname'];
-            $nachname = $zeile['nachname'];
+            $vorname = htmlspecialchars($zeile['vorname']);
+            $nachname = htmlspecialchars($zeile['nachname']);
             echo "<tr><td>$vorname</td><td>$nachname</td></tr>";
         }
         ?>
     </table>
-    <a href="neu.html">Neue Schüler_in erstellen</a>
+    <a class="button neu" href="neu.html">Neue Schüler_in erstellen</a>
+    </main>
+    <footer>
+        <p>von Franz Kohnle</p>
+    </footer>
 </body>
 
 </html>
