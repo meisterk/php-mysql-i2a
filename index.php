@@ -19,6 +19,8 @@
         <tr>
             <th>Vorname</th>
             <th>Nachname</th>
+            <th>Ändern</th>
+            <th>Löschen</th>
         </tr>
 
         <?php
@@ -45,13 +47,27 @@
             $statement->execute([$vorname, $nachname]);            
         }
 
+        // delete schueler
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];            
+            // Prepared Statement zur Verhinderung von SQL-Injections
+            $sql = "DELETE FROM schueler WHERE id = ?";
+            $statement = $pdo->prepare($sql);
+            $statement->execute([$id]);            
+        }
+
         // read and display data
         $sql = "SELECT * FROM schueler";
         foreach ($pdo->query($sql) as $zeile) {
-            // htmlspecialchars zur Verhinderung von XSS
+            $id =$zeile['id'];
             $vorname = htmlspecialchars($zeile['vorname']);
             $nachname = htmlspecialchars($zeile['nachname']);
-            echo "<tr><td>$vorname</td><td>$nachname</td></tr>";
+            echo "<tr>
+                    <td>$vorname</td>
+                    <td>$nachname</td>
+                    <td><a class='button aendern' href='./update.php?id=$id'>Ändern</a></td>
+                    <td><a class='button loeschen' href='./?id=$id'>Löschen</a></td>
+                  </tr>";
         }
         ?>
     </table>

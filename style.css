@@ -67,6 +67,15 @@ tr:nth-child(even) {
     background-color: red;
     width: calc(50% - 0.75em);
 }
+
+.loeschen {
+    background-color: red;
+    width: calc(50% - 0.75em);
+}
+.aendern {
+    background-color: blue;
+    width: calc(50% - 0.75em);
+}
 .speichern {
     background-color: blue;
     width: calc(50% - 0.75em);
