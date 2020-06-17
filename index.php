@@ -1,3 +1,7 @@
+<?php
+    require('schueler.php');
+    require('dao.php');
+?>
 <!DOCTYPE html>
 <html lang="de">
 
