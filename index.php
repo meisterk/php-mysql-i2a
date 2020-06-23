@@ -28,44 +28,29 @@
         </tr>
 
         <?php
-        $dbname = 'testdb';
-        $dbuser = 'testuser';
-        $dbpassword = '123';
-
-        // connect to MySQL as testuser
-        $pdo = new PDO(
-            "mysql:host=localhost;dbname=$dbname",
-            $dbuser,
-            $dbpassword
-        );
-        // show errors
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $dao = new DAO();
 
         // create schueler
         if (isset($_POST['vorname']) && isset($_POST['nachname'])) {
             $vorname = $_POST['vorname'];
             $nachname = $_POST['nachname'];
-            // Prepared Statement zur Verhinderung von SQL-Injections
-            $sql = "INSERT INTO schueler SET vorname = ?, nachname = ?";
-            $statement = $pdo->prepare($sql);
-            $statement->execute([$vorname, $nachname]);            
+            $schueler = new Schueler(-1, $vorname, $nachname);
+            $dao->addSchueler($schueler);        
         }
 
         // delete schueler
         if (isset($_GET['id'])) {
             $id = $_GET['id'];            
-            // Prepared Statement zur Verhinderung von SQL-Injections
-            $sql = "DELETE FROM schueler WHERE id = ?";
-            $statement = $pdo->prepare($sql);
-            $statement->execute([$id]);            
+            $dao->deleteSchueler($id);         
         }
 
         // read and display data
-        $sql = "SELECT * FROM schueler";
-        foreach ($pdo->query($sql) as $zeile) {
-            $id =$zeile['id'];
-            $vorname = htmlspecialchars($zeile['vorname']);
-            $nachname = htmlspecialchars($zeile['nachname']);
+        $allSchueler = $dao->getAllSchueler();
+       
+        foreach ($allSchueler as $schueler) {
+            $id = $schueler->getId();
+            $vorname = htmlspecialchars($schueler->getVorname());
+            $nachname = htmlspecialchars($schueler->getNachname());
             echo "<tr>
                     <td>$vorname</td>
                     <td>$nachname</td>

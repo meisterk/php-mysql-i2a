@@ -1,3 +1,7 @@
+<?php
+    require('schueler.php');
+    require('dao.php');
+?>
 <!DOCTYPE html>
 <html lang="de">
 
@@ -16,28 +20,10 @@
     <?php
     if(isset($_GET['id'])){
         $id = $_GET['id'];
-
-        $dbname = 'testdb';
-        $dbuser = 'testuser';
-        $dbpassword = '123';
-
-        // connect to MySQL as testuser
-        $pdo = new PDO(
-            "mysql:host=localhost;dbname=$dbname",
-            $dbuser,
-            $dbpassword
-        );
-        // show errors
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // read  data
-        $sql = "SELECT * FROM schueler WHERE id = ?";
-        $statement = $pdo->prepare($sql);
-        $statement->execute([$id]);
-        while($row = $statement->fetch()){
-            $vorname = htmlspecialchars($row['vorname']);
-            $nachname = htmlspecialchars($row['nachname']);
-        }        
+        $dao = new DAO();
+        $schueler = $dao->getSchuelerById($id); 
+        $vorname = $schueler->getVorname(); 
+        $nachname = $schueler->getNachname();          
     }
     ?>
     <main>

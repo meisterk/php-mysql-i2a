@@ -19,14 +19,18 @@ class DAO {
     }
 
     public function addSchueler($schueler){
-        // Prepared Statement zur Verhinderung von SQL-Injections
         $sql = "INSERT INTO schueler SET vorname = ?, nachname = ?";
         $statement = $this->pdo->prepare($sql);
         $statement->execute([$schueler->getVorname(), $schueler->getNachname()]);    
     }
 
+    public function updateSchueler($schueler){
+        $sql = "UPDATE schueler SET vorname = ?, nachname = ? WHERE id = ?";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([$schueler->getVorname(), $schueler->getNachname(), $schueler->getId()]);    
+    }
+
     public function deleteSchueler($id){
-        // Prepared Statement zur Verhinderung von SQL-Injections
         $sql = "DELETE FROM schueler WHERE id = ?";
         $statement = $this->pdo->prepare($sql);
         $statement->execute([$id]);  
@@ -43,5 +47,18 @@ class DAO {
             array_push($list, $schueler);
         }
         return $list;
+    } 
+    
+    public function getSchuelerById($id){
+        $sql = "SELECT * FROM schueler WHERE id = ?";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([$id]);
+        while($row = $statement->fetch()){
+            $vorname = htmlspecialchars($row['vorname']);
+            $nachname = htmlspecialchars($row['nachname']);
+            $schueler = new Schueler($id, $vorname, $nachname);
+        }
+        return $schueler;
     }    
+    
 }
