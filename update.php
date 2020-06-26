@@ -36,6 +36,8 @@
             <label for="inputNachname">Nachname</legend>
             <input id = "inputNachname" type="text" name="nachname" value="<?=$nachname?>">
         </div> 
+        <input type="hidden" name="id" value="<?=$id?>">
+        <input type="hidden" name="command" value="update">        
         <div>
             <button class="button speichern">Speichern</button> 
             <a class="button abbrechen" href="./">Abbrechen</a>

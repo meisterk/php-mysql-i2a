@@ -29,13 +29,24 @@
 
         <?php
         $dao = new DAO();
-
-        // create schueler
-        if (isset($_POST['vorname']) && isset($_POST['nachname'])) {
+        
+        if (isset($_POST['vorname']) && isset($_POST['nachname']) && isset($_POST['command'])) {
             $vorname = $_POST['vorname'];
             $nachname = $_POST['nachname'];
-            $schueler = new Schueler(-1, $vorname, $nachname);
-            $dao->addSchueler($schueler);        
+            $command = $_POST['command'];
+
+            // create schueler
+            if($command === 'create'){
+                $schueler = new Schueler(-1, $vorname, $nachname);
+                $dao->addSchueler($schueler);  
+            }
+            
+            // update schueler
+            if(isset($_POST['id']) && $command === 'update'){
+                $id = $_POST['id'];
+                $schueler = new Schueler($id, $vorname, $nachname);
+                $dao->updateSchueler($schueler);  
+            }
         }
 
         // delete schueler
